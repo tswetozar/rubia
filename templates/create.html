@@ -1,0 +1,28 @@
+{% extends 'shared/base.html' %}
+
+{% block site_content %}
+    <div class="container">
+        <h3>create item</h3>
+        <div class="row">
+            <form class="col s12" method="post">
+                {% csrf_token %}
+                {{ form.errors }}
+                <div class="row">
+                    <div class="input-field col s5">
+                        {{ form.first_name }}
+                    </div>
+                    <div class="input-field col s5">
+                        {{ form.last_name }}
+                    </div>
+                    <div class="input-field col s2">
+                        {{ form.age }}
+                    </div>
+                </div>
+                <button class="btn waves-effect waves-light" type="submit" name="action">Submit!
+                    <i class="material-icons right">send</i></button>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'shared/base.html' %}
+
+{% block site_content %}
+
+    <div class="container">
+        <h5 class="center">list all items</h5>
+        <table class="highlight">
+            <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Family Name</th>
+                <th>Age</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for rx in rxs %}
+                <tr>
+                    <td>{{ rx.first_name }}</td>
+                    <td>{{ rx.last_name }}</td>
+                    <td>{{ rx.age }}</td>
+                    <td>{{ rx.status }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

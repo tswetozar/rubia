@@ -2,11 +2,11 @@
 
 <nav class="white" role="navigation">
     <div class="nav-wrapper container">
-        <a id="logo-container" href="#" class="brand-logo"><img src="{% static 'img/logoBg.png' %}" alt="RubiaPharmacy Logo"></a>
+        <a id="logo-container" href="{% url 'common index' %}" class="brand-logo"><img src="{% static 'img/logoBg.png' %}" alt="RubiaPharmacy Logo"></a>
         <ul class="right hide-on-med-and-down">
-            <li><a href="#">Navbar Link</a></li>
-            <li><a href="#">Navbar Link</a></li>
-            <li><a href="#">Navbar Link</a></li>
+            <li><a href="{% url 'list rx' %}">LIST ALL RXs</a></li>
+            <li><a href="{% url 'create rx' %}">CREATE RX</a></li>
+            <li><a href="{% url 'edit rx' %}">Navbar Link</a></li>
         </ul>
 
         <ul id="nav-mobile" class="sidenav">
