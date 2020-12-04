@@ -11,3 +11,6 @@ class Card(models.Model):
     name = models.CharField(max_length=50, blank=True)
     card_number = models.PositiveBigIntegerField(blank=False)
     rating = models.PositiveIntegerField(default=0, editable=False)
+
+    def __str__(self):
+        return f'{self.card_number} {self.name} {self.rating}'
