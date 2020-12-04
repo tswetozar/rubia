@@ -19,9 +19,12 @@ class Rx(models.Model):
     status = models.CharField(
         max_length=1,
         choices=STATUS_CHOICES,
-        blank=False,
+        blank=True,
         default='A'
     )
+    image = models.ImageField(max_length=255, upload_to='public/rx')
 
     def __str__(self):
         return f'{self.first_name} {self.last_name} {self.age}'
+
+
