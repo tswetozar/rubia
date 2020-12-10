@@ -19,8 +19,10 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('common.urls')),
-    path('rx/', include('rx.urls')),
-    path('file/', include('discount.urls'))
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+                  path('accounts/', include('accounts.urls')),
+                  path('admin/', admin.site.urls),
+                  path('', include('common.urls')),
+                  path('rx/', include('rx.urls')),
+                  path('file/', include('discount.urls')),
+                  path('', include('django.contrib.auth.urls')),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

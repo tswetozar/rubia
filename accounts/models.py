@@ -51,3 +51,14 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.email
+
+
+class UserProfile(models.Model):
+    profile_picture = models.ImageField(
+        upload_to='users',
+        blank=True,
+    )
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username

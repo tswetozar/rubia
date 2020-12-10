@@ -1,0 +1,60 @@
+{% extends 'shared/base.html' %}
+
+{% block site_content %}
+    <div class="row container">
+        <div class="col s12 m6 offset-l3 offset-m3">
+            <div class="card card-panel hoverable white darken-1">
+                <div class="card-content black-text">
+                    <span class="card-title">Sign up</span>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form }}
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </form>
+                </div>
+                <div class="card-action center-align">
+                    <a href="#">If you have a profile, please LogIn</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    {#        <div class="row">#}
+    {#            <form class="col s12" method="post" action="{% url 'create rx' %}" enctype="multipart/form-data">#}
+    {#                {% csrf_token %}#}
+    {#                {{ form.errors }}#}
+    {#                <div class="row">#}
+    {#                    <div class="input-field col s5">#}
+    {#                        {{ form.first_name }}#}
+    {#                    </div>#}
+    {#                    <div class="input-field col s5">#}
+    {#                        {{ form.last_name }}#}
+    {#                    </div>#}
+    {#                    <div class="input-field col s2">#}
+    {#                        {{ form.age }}#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#                <div class="row">#}
+    {#                    <div class="file-field input-field col s12">#}
+    {#                        <div class="btn">#}
+    {#                            <span>Rx Image</span>#}
+    {#                            {{ form.image }}#}
+    {#                        </div>#}
+    {#                        <div class="file-path-wrapper">#}
+    {#                            <input class="file-path validate" type="text">#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#                <button class="btn waves-effect waves-light" type="submit" name="action">Submit!#}
+    {#                    <i class="material-icons right">send</i></button>#}
+    {#            </form>#}
+    {#        </div>#}
+    {#    </div>#}
+
+
+{% endblock %}
