@@ -59,6 +59,7 @@ class UserProfile(models.Model):
         blank=True,
     )
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    card_number = models.CharField(max_length=12, blank=True,)
 
     def __str__(self):
-        return self.user.username
+        return f'{self.user.email}'

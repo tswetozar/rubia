@@ -1,7 +1,10 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
 # Create your models here.
+from accounts.models import CustomUser
+
 
 class Rx(models.Model):
     STATUS_CHOICES = (
@@ -23,6 +26,7 @@ class Rx(models.Model):
         default='A'
     )
     image = models.ImageField(max_length=255, upload_to='public/rx')
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.first_name} {self.last_name} {self.age}'

@@ -1,39 +1,148 @@
 {% extends 'shared/base.html' %}
 
+{% block styles %}
+    {% load static %}
+    <link href="{% static 'css/custom/profile_page.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+{% endblock %}
+
 {% block site_content %}
 
-    <div class="container">
-        <h3>user profile</h3>
-{#        <div class="row">#}
-{#            <form class="col s12" method="post" action="{% url 'create rx' %}" enctype="multipart/form-data">#}
-{#                {% csrf_token %}#}
-{#                {{ form.errors }}#}
-{#                <div class="row">#}
-{#                    <div class="input-field col s5">#}
-{#                        {{ form.first_name }}#}
-{#                    </div>#}
-{#                    <div class="input-field col s5">#}
-{#                        {{ form.last_name }}#}
-{#                    </div>#}
-{#                    <div class="input-field col s2">#}
-{#                        {{ form.age }}#}
+    {% load static %}
+
+    <div class="section"></div>
+{#    {% include 'partials/profile_data.html' %}#}
+
+    {% include 'partials/list_rxs.html' %}
+
+    {% include 'partials/input_rx.html' %}
+
+
+{#    <div class="container">#}
+{#        <h5 class="grey-text">input an Rx</h5>#}
+{#        <div class="col s12 m8 offset-m2 l6 offset-l3">#}
+{#            <div class="card-panel hoverable grey lighten-5 z-depth-1">#}
+{#                <div class="row valign-wrapper">#}
+{#                    <div class="col s12 center">#}
+{#                        <div class="row">#}
+{#                            <form class="col s12" method="post" action="{% url 'create rx' %}"#}
+{#                                  enctype="multipart/form-data">#}
+{#                                {% csrf_token %}#}
+{#                                {{ form.errors }}#}
+{#                                <div class="row">#}
+{#                                    <div class="input-field col s5">#}
+{#                                        {{ form.first_name }}#}
+{#                                    </div>#}
+{#                                    <div class="input-field col s5">#}
+{#                                        {{ form.last_name }}#}
+{#                                    </div>#}
+{#                                    <div class="input-field col s2">#}
+{#                                        {{ form.age }}#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="row">#}
+{#                                    <div class="file-field input-field col s12">#}
+{#                                        <div class="btn">#}
+{#                                            <span>Rx Image</span>#}
+{#                                            {{ form.image }}#}
+{#                                        </div>#}
+{#                                        <div class="file-path-wrapper">#}
+{#                                            <input class="file-path validate" type="text">#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <button class="btn waves-effect waves-light" type="submit" name="action">Submit!#}
+{#                                    <i class="material-icons right">send</i></button>#}
+{#                            </form>#}
+{#                        </div>#}
 {#                    </div>#}
 {#                </div>#}
-{#                <div class="row">#}
-{#                    <div class="file-field input-field col s12">#}
-{#                        <div class="btn">#}
-{#                            <span>Rx Image</span>#}
-{#                            {{ form.image }}#}
-{#                        </div>#}
-{#                        <div class="file-path-wrapper">#}
-{#                            <input class="file-path validate" type="text">#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <button class="btn waves-effect waves-light" type="submit" name="action">Submit!#}
-{#                    <i class="material-icons right">send</i></button>#}
-{#            </form>#}
+{#            </div>#}
 {#        </div>#}
 {#    </div>#}
+
+{#    <div class="container">#}
+{#        <h5 class="grey-text">yours Rxs</h5>#}
+{#        <div class="col s12 m8 offset-m2 l6 offset-l3">#}
+{#            <div class="card-panel hoverable grey lighten-5 z-depth-1">#}
+{#                <div class="row valign-wrapper">#}
+{#                    <div class="col s12 center">#}
+{#                        <table class="highlight" align="left">#}
+{#                            <thead>#}
+{#                            <tr>#}
+{#                                <th>Image</th>#}
+{#                                <th>First Name</th>#}
+{#                                <th>Family Name</th>#}
+{#                                <th>Age</th>#}
+{#                                <th>Status</th>#}
+{#                                <th>Edit</th>#}
+{#                            </tr>#}
+{#                            </thead>#}
+{##}
+{#                            <tbody>#}
+{#                            {% for rx in rxs %}#}
+{#                                {% if pk != rx.id %}#}
+{##}
+{#                                    <tr>#}
+{#                                        <td><img class="materialboxed table-data-img circle" src="{{ rx.image.url }}"#}
+{#                                                 alt=" "></td>#}
+{#                                        <td>{{ rx.first_name }}</td>#}
+{#                                        <td>{{ rx.last_name }}</td>#}
+{#                                        <td>{{ rx.age }}</td>#}
+{#                                        <td>{{ rx.status }}</td>#}
+{#                                        <td><a href="{% url 'user profile' pk=rx.id %}" class="waves-effect waves-light btn">#}
+{#                                            <i class="material-icons left">edit</i>#}
+{#                                            edit#}
+{#                                        </a></td>#}
+{#                                    </tr>#}
+{##}
+{#                                {% else %}#}
+{##}
+{#                                    <tr>#}
+{#                                        <form class="col s12" method="post" enctype="multipart/form-data">#}
+{#                                            {% csrf_token %}#}
+{#                                            {{ form.errors }}#}
+{#                                            <td><img class="materialboxed table-data-img circle"#}
+{#                                                     src="{{ rx.image.url }}"#}
+{#                                                     alt=" "></td>#}
+{#                                            <td>{{ edit_form.first_name }}</td>#}
+{#                                            <td>{{ edit_form.last_name }}</td>#}
+{#                                            <td>{{ edit_form.age }}</td>#}
+{#                                            <td>{{ edit_form.status }}</td>#}
+{#                                            <td>#}
+{#                                                <div class="file-field input-field">#}
+{#                                                    <div class="btn waves-effect waves-light">#}
+{#                                                        <span>Rx Image</span>#}
+{#                                                        {{ edit_form.image }}#}
+{#                                                    </div>#}
+{#                                                    <div class="file-path-wrapper">#}
+{#                                                        <div>#}
+{#                                                            <input class="file-path validate" type="text"#}
+{#                                                                   value="None Selected">#}
+{#                                                            <label for="id_image">Current: {{ edit_form.image.value }}</label>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                    <div class="">#}
+{#                                                            <a href="{% url 'edit rx' pk=rx.id %}"#}
+{#                                                               class="waves-effect waves-light btn">#}
+{#                                                                <i class="material-icons left">edit</i>#}
+{#                                                                edit#}
+{#                                                            </a>#}
+{#                                                        </div>#}
+{#                                                </div>#}
+{#                                            </td>#}
+{#                                        </form>#}
+{#                                    </tr>#}
+{##}
+{#                                {% endif %}#}
+{##}
+{#                            {% endfor %}#}
+{#                            </tbody>#}
+{#                        </table>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+
 
 {% endblock %}

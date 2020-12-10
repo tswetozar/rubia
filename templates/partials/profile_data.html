@@ -1,0 +1,21 @@
+{% load static %}
+
+<div class="container">
+        <h5 class="grey-text">user profile</h5>
+        <div class="col s12 m8 offset-m2 l6 offset-l3">
+            <div class="card-panel hoverable grey lighten-5 z-depth-1">
+                <div class="row valign-wrapper">
+                    <div class="col s2">
+                        <img src="{% static 'img/anonymous-user.png' %}" alt="" class="circle responsive-img">
+                    </div>
+                    <div class="col s10">
+              <span class="grey-text">
+                <h4>Hello, {{ user.first_name }} {{ user.last_name }}</h4>
+                  <h6>Your email is: {{ user.email }}</h6>
+                  <h6>Your card number is: {{ user.userprofile.card_number }}</h6>
+              </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

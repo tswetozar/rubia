@@ -52,6 +52,8 @@ class EditRxForm(forms.Form):
     )
     status = forms.ChoiceField(
         choices=STATUS_CHOICES,
+        widget=forms.Select,
+        disabled=True
     )
     image = forms.ImageField(
         widget=forms.FileInput(

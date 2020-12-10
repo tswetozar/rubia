@@ -1,0 +1,10 @@
+.table-data-img {
+    width: 50px;
+    height: auto;
+}
+
+.file-field .btn, .file-field .btn-large, .file-field .btn-small {
+float: none;
+height: 3rem;
+line-height: 3rem;
+}

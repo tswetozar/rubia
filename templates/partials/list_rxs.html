@@ -1,0 +1,109 @@
+{% load static %}
+
+<div class="container">
+    <h5 class="grey-text">yours Rxs</h5>
+    <div class="col s12 m8 offset-m2 l6 offset-l3">
+        <div class="card-panel hoverable grey lighten-5 z-depth-1">
+            <div class="row valign-wrapper">
+                <div class="col s12 center">
+                    <table class="highlight" align="left">
+                        <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>First Name</th>
+                            <th>Family Name</th>
+                            <th>Age</th>
+                            <th>Status</th>
+                            <th>Edit</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {% for rx in rxs %}
+                            {% if pk != rx.id %}
+
+                                <tr>
+                                    <td><img class="materialboxed table-data-img" src="{{ rx.image.url }}"
+                                             alt=" "></td>
+                                    <td>{{ rx.first_name }}</td>
+                                    <td>{{ rx.last_name }}</td>
+                                    <td>{{ rx.age }}</td>
+                                    <td>
+                                        {{ rx.status }}
+                                    </td>
+                                    <td><a href="{% url 'user profile' pk=rx.id %}"
+                                           class="waves-effect waves-light btn">
+                                        <i class="material-icons left">edit</i>
+                                        edit
+                                    </a></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">
+                                        <div class="chip">
+                                            <img src="images/yuna.jpg" alt="Contact Person">
+                                            <a class="modal-trigger" href="#modal1">Jane Doe</a>
+
+                                            <div id="modal1" class="modal">
+                                                <div class="modal-content">
+                                                    <h4>Modal Header</h4>
+                                                    <p>A bunch of text</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            {% else %}
+
+                                <tr>
+                                    <form class="col s12" method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        {{ form.errors }}
+                                        <td><img class="materialboxed table-data-img circle"
+                                                 src="{{ rx.image.url }}"
+                                                 alt=" "></td>
+                                        <td>{{ edit_form.first_name }}</td>
+                                        <td>{{ edit_form.last_name }}</td>
+                                        <td>{{ edit_form.age }}</td>
+                                        <td>{{ edit_form.status }}</td>
+                                        <td>
+                                            <div class="file-field input-field">
+                                                <div class="btn waves-effect waves-light">
+                                                    <span>Rx Image</span>
+                                                    {{ edit_form.image }}
+                                                </div>
+                                                <div class="file-path-wrapper">
+                                                    <div>
+                                                        <input class="file-path validate" type="text"
+                                                               value="None Selected">
+                                                        <label for="id_image">Current: {{ edit_form.image.value }}</label>
+                                                    </div>
+                                                </div>
+                                                <div class="">
+                                                    {#                                                            <a href="{% url 'edit rx' pk=rx.id %}"#}
+                                                    {#                                                               class="waves-effect waves-light btn">#}
+                                                    {#                                                                <i class="material-icons left">edit</i>#}
+                                                    {#                                                                edit#}
+                                                    {#                                                            </a>#}
+                                                    <button class="btn waves-effect waves-light" type="submit"
+                                                            name="action">Submit!
+                                                        <i class="material-icons right">send</i></button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </form>
+                                </tr>
+
+                            {% endif %}
+
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

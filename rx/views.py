@@ -1,3 +1,4 @@
+from django.db import transaction
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -6,7 +7,9 @@ from rx.models import Rx
 
 
 def list_rx(request):
-    rxs = Rx.objects.all().order_by('id')
+
+    user = request.user
+    rxs = Rx.objects.filter(user_id=user.id).order_by('id')
     status_choices = {
         'A': 'Active',
         'H': 'On Hold',
@@ -19,11 +22,12 @@ def list_rx(request):
         rx.status = status_choices[rx.status]
 
     context = {
-        'rxs': rxs
+        'rxs': rxs,
     }
     return render(request, 'list.html', context)
 
 
+@transaction.atomic
 def create_rx(request):
     if request.method == "GET":
         context = {
@@ -33,11 +37,11 @@ def create_rx(request):
 
     else:
         form = CreateRxForm(request.POST, request.FILES)
-        # form.data['status'] = 'A'
-
+        user = request.user
         if form.is_valid():
             # form.save()
             rx = Rx(**form.cleaned_data)
+            rx.user = user
             rx.save()
             return redirect('list rx')
         else:
@@ -60,7 +64,11 @@ def edit_rx(request, pk):
         image = rx.image
         if not request.FILES:
             request.FILES['image'] = image
-        form = EditRxForm(request.POST, request.FILES)
+        form = EditRxForm(request.POST, request.FILES, initial=rx.__dict__)
+        form.full_clean()
+        # status_obj = {'status': rx.status}
+        # form.data.update(status_obj)
+        # form.data['status'] = rx.status
 
         if form.is_valid():
             rx.first_name = form.cleaned_data['first_name']
