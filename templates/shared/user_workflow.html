@@ -1,0 +1,31 @@
+{% extends 'shared/base.html' %}
+
+{% block styles %}
+    {% load static %}
+    <link href="{% static 'css/custom/profile_page.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+{% endblock %}
+
+{% block site_content %}
+    {% load static %}
+    {% load group_filter_template_tag %}
+
+    <div class="section"></div>
+    {#    {% include 'partials/profile_data.html' %}#}
+
+
+    {% if request.user|has_group:"Clients" %}
+        {#        has_group is a custom template filter which returns True if the user belongs to the cited comma and space separated Groups#}
+        {% include 'partials/list_rxs.html' %}
+
+        {% include 'partials/input_rx.html' %}
+    {% else %}
+
+        {% include 'partials/list_rxs.html' %}
+
+
+    {% endif %}
+
+
+
+
+{% endblock %}

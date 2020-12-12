@@ -4,7 +4,6 @@ from rx.models import Rx
 
 
 class EditRxForm(forms.Form):
-
     STATUS_CHOICES = (
         ('A', 'Active'),
         ('H', 'On Hold'),
@@ -62,7 +61,6 @@ class EditRxForm(forms.Form):
 
 
 class CreateRxForm(forms.Form):
-
     STATUS_CHOICES = (
         ('A', 'Active'),
         ('H', 'On Hold'),
@@ -110,5 +108,21 @@ class CreateRxForm(forms.Form):
     )
     image = forms.ImageField(
         widget=forms.FileInput(
+        )
+    )
+
+
+class OnHoldFormCreate(forms.Form):
+
+    comment = forms.CharField(
+        max_length=160,
+        label='',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Comment',
+                'id': 'comment_id',
+                'type': 'text',
+                'class': 'validate',
+            }
         )
     )

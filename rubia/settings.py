@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'rx',
     'discount',
     'accounts',
+    'badwords',
 ]
 
 MIDDLEWARE = [
@@ -135,4 +136,5 @@ MEDIA_ROOT = join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
-LOGIN_REDIRECT_URL = '/rx/'
+LOGIN_REDIRECT_URL = '/rx/workflow/'
+LOGIN_URL = 'login'

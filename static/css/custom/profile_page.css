@@ -8,3 +8,22 @@ float: none;
 height: 3rem;
 line-height: 3rem;
 }
+
+.chip-color-red {
+    background-color: #f4c2c2
+}
+
+.chip-color-blue {
+    background-color: #c8cbf4
+}
+
+.chip-color-orange {
+    background-color: #f4e4c8
+}
+
+.chip-color-green {
+    background-color: #c8f4d4
+}
+
+
+
