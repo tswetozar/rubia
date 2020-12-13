@@ -53,7 +53,6 @@ class Rx(models.Model):
         return f'{self.first_name} {self.last_name} {self.age}'
 
 
-
 class OnHold(models.Model):
     comment = models.CharField(max_length=160, blank=True)
     rx = models.ForeignKey(Rx, on_delete=models.CASCADE)
@@ -61,14 +60,34 @@ class OnHold(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.user} {self.created}'
+        return f'OnHold {self.user} {self.created}'
 
 
-# class Prepeared(models.Model):
-#     comment = models.CharField(max_length=160, blank=True)
-#     rx = models.ForeignKey(Rx, on_delete=models.CASCADE)
-#     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-#     created = models.DateTimeField(auto_now_add=True)
-#
-#     def __str__(self):
-#         return f'{self.user} {self.created}'
+class Prepared(models.Model):
+    comment = models.CharField(max_length=160, blank=True)
+    rx = models.ForeignKey(Rx, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Prepared {self.user} {self.created}'
+
+
+class Ready(models.Model):
+    comment = models.CharField(max_length=160, blank=True)
+    rx = models.ForeignKey(Rx, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Ready {self.user} {self.created}'
+
+
+class Finished(models.Model):
+    comment = models.CharField(max_length=160, blank=True)
+    rx = models.ForeignKey(Rx, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Finished {self.user} {self.created}'

@@ -1,0 +1,19 @@
+{% load static %}
+
+<div class="container">
+    <h5 class="grey-text">errors</h5>
+    <div class="col s12 m8 offset-m2 l6 offset-l3">
+        <div class="card-panel hoverable grey lighten-5 z-depth-1">
+            <div class="row valign-wrapper">
+                <div class="col s12">
+                    <h5 class="center-align red-text">{{ errors }}</h5>
+                    <div class="col s5"></div>
+                    <div class="col s2">
+                         <a href="{% url 'current user profile' %}" class="image-center waves-effect waves-teal btn-flat">Ok!</a>
+                    </div>
+                    <div class="col s5"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

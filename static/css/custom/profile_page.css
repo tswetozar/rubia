@@ -25,5 +25,10 @@ line-height: 3rem;
     background-color: #c8f4d4
 }
 
+.image-center {
+    margin: 0 auto;
+    width: 80%;
+}
+
 
 

@@ -1,55 +1,55 @@
 {% extends 'shared/base.html' %}
 
-{% block site_content %}
-    <div class="container">
-        <h3>edit item</h3>
-        <div class="row">
-            <form class="col s12" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.errors }}
-                <div class="row">
-                    <div class="input-field col s4">
-                        {{ form.first_name }}
-                    </div>
-                    <div class="input-field col s4">
-                        {{ form.last_name }}
-                    </div>
-                    <div class="input-field col s2">
-                        {{ form.status }}
-                    </div>
-                    <div class="input-field col s2">
-                        {{ form.age }}
-                    </div>
-                </div>
-                <div class="row valign-wrapper">
-                    <div class="file-field input-field col s10">
-                        <div class="btn waves-effect waves-light">
-                            <span>Rx Image</span>
-                            {{ form.image }}
-                        </div>
-                        <div class="file-path-wrapper">
-                            <input class="file-path validate" type="text" value="{{ form.image.value }}">
-                        </div>
-                    </div>
-                     <div class="col s2">
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Submit!
-                            <i class="material-icons right">send</i></button>
-                    </div>
-                </div>
+{% block styles %}
+    {% load static %}
+    <link href="{% static 'css/custom/profile_page.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+{% endblock %}
 
-            </form>
-            <form class="col s12" method="post" action="{% url 'on hold rx' rx.pk %}">
-                 <div class="row valign-wrapper">
-                    <div class="col s6">
-                        {% csrf_token %}
-                        {{ form_on_hold }}
+{% block site_content %}
+    {% load static %}
+    {% load group_filter_template_tag %}
+
+    <div class="section"></div>
+    <div class="container">
+        <h5 class="grey-text">Edit {{ rx.first_name }}s RX</h5>
+        <div class="col s12 m8 offset-m2 l6 offset-l3">
+            <div class="card-panel hoverable grey lighten-5 z-depth-1">
+                <div class="row valign-wrapper">
+                    <div class="col s12 center">
+                        <div class="image-center">
+                            <img width="650" src="{{ rx.image.url }}" alt="Patients Rx">
+                        </div>
+
+                        <div class="row">
+
+                            {% if request.user|has_group:"Clients" %}
+
+                                {% include 'components/edit_form.html' %}
+
+                            {% endif %}
+
+                            {% if request.user|has_group:"Operators, Managers" %}
+
+                                {% include 'components/onhold_form.html' %}
+
+                                {% include 'components/prepared_form.html' %}
+
+                            {% endif %}
+
+                            {% if request.user|has_group:"Pharmacists, Managers" %}
+
+                                {% include 'components/ready_form.html' %}
+
+                                {% include 'components/finished_form.html' %}
+
+                            {% endif %}
+
+                        </div>
                     </div>
-                     <div class="col s2">
-                         <button class="btn waves-effect waves-light" type="submit" name="action">OnHold
-                            <i class="material-icons right">send</i></button>
-                     </div>
+
+
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 

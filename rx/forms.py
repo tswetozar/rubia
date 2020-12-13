@@ -1,6 +1,6 @@
 from django import forms
 
-from rx.models import Rx
+from rx.validators import contains_only_letters, offensive_word
 
 
 class EditRxForm(forms.Form):
@@ -79,7 +79,12 @@ class CreateRxForm(forms.Form):
                 'type': 'text',
                 'class': 'validate',
             }
-        )
+
+        ),
+        validators=[
+            contains_only_letters,
+            offensive_word,
+        ]
     )
     last_name = forms.CharField(
         max_length=30,
@@ -112,7 +117,7 @@ class CreateRxForm(forms.Form):
     )
 
 
-class OnHoldFormCreate(forms.Form):
+class StatusModifierCreateForm(forms.Form):
 
     comment = forms.CharField(
         max_length=160,
@@ -126,3 +131,16 @@ class OnHoldFormCreate(forms.Form):
             }
         )
     )
+
+
+class FilterForm(forms.Form):
+    ORDER_ASC = 'asc'
+    ORDER_DESC = 'desc'
+
+    ORDER_CHOICES = (
+        (ORDER_ASC, 'Ascending'),
+        (ORDER_DESC, 'Descending'),
+    )
+
+    text = forms.CharField(required=False)
+    order = forms.ChoiceField(choices=ORDER_CHOICES, required=False)

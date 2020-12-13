@@ -1,0 +1,7 @@
+{% for rx in rxs %}
+    {% if pk != rx.id %}
+        {% include 'partials/table_row_list.html' %}
+    {% else %}
+        {% include 'partials/table_row_edit.html' %}
+    {% endif %}
+{% endfor %}

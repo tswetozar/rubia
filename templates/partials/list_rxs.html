@@ -1,7 +1,9 @@
 {% load static %}
+{% load group_filter_template_tag %}
 
 <div class="container">
-    <h5 class="grey-text">yours Rxs</h5>
+
+    <h5 class="grey-text">Rxs</h5>
     <div class="col s12 m8 offset-m2 l6 offset-l3">
         <div class="card-panel hoverable grey lighten-5 z-depth-1">
             <div class="row valign-wrapper">
@@ -19,76 +21,12 @@
                         </thead>
 
                         <tbody>
-                        {% for rx in rxs %}
-                            {% if pk != rx.id %}
-
-                                <tr>
-                                    <td><img class="materialboxed table-data-img" src="{{ rx.image.url }}"
-                                             alt=" "></td>
-                                    <td>{{ rx.first_name }}</td>
-                                    <td>{{ rx.last_name }}</td>
-                                    <td>{{ rx.age }}</td>
-                                    <td>
-                                        {{ rx.status }}
-                                    </td>
-                                    <td><a href="{% url 'user profile' pk=rx.id %}"
-                                           class="waves-effect waves-light btn">
-                                        <i class="material-icons left">edit</i>
-                                        edit
-                                    </a></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="6">
-                                        {% if rx.onhold_set %}
-                                            {% for onhold in rx.onhold_set.all %}
-                                                {% include 'components/on_hold_modal.html' %}
-                                            {% endfor %}
-                                        {% endif %}
-                                    </td>
-                                </tr>
-
-                            {% else %}
-
-                                <tr>
-                                    <form class="col s12" method="post" enctype="multipart/form-data">
-                                        {% csrf_token %}
-                                        {{ edit_form.errors }}
-                                        <td><img class="materialboxed table-data-img circle"
-                                                 src="{{ rx.image.url }}"
-                                                 alt=" "></td>
-                                        <td>{{ edit_form.first_name }}</td>
-                                        <td>{{ edit_form.last_name }}</td>
-                                        <td>{{ edit_form.age }}</td>
-                                        <td>{{ edit_form.status }}</td>
-                                        <td>
-                                            <div class="file-field input-field">
-                                                <div class="btn waves-effect waves-light">
-                                                    <span>Rx Image</span>
-                                                    {{ edit_form.image }}
-                                                </div>
-                                                <div class="file-path-wrapper">
-                                                    <div>
-                                                        <input id="file-upload" class="file-path validate" type="text"
-                                                               value="None Selected">
-                                                        <label for="file-upload">Current: {{ edit_form.image.value }}</label>
-                                                    </div>
-                                                </div>
-                                                <div class="">
-                                                    <button id="submit-edit" class="btn waves-effect waves-light"
-                                                            type="submit"
-                                                            name="action">Submit!
-                                                        <i class="material-icons right">send</i></button>
-                                                    <label class="red-text"
-                                                           for="submit-edit">{{ edit_form.errors }}</label>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </form>
-                                </tr>
-
-                            {% endif %}
-
-                        {% endfor %}
+                        {% if request.user|has_group:"Operators, Pharmacists, Managers" %}
+                            {#        has_group is a custom template filter which returns True if the user belongs to the cited comma and space separated Groups#}
+                            {% include 'partials/table_body_staff.html' %}
+                        {% else %}
+                            {% include 'partials/table_body_customers.html' %}
+                        {% endif %}
                         </tbody>
                     </table>
                 </div>

@@ -1,0 +1,36 @@
+<tr>
+    <form class="col s12" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ edit_form.errors }}
+        <td><img class="materialboxed table-data-img circle"
+                 src="{{ rx.image.url }}"
+                 alt=" "></td>
+        <td>{{ edit_form.first_name }}</td>
+        <td>{{ edit_form.last_name }}</td>
+        <td>{{ edit_form.age }}</td>
+        <td>{{ edit_form.status }}</td>
+        <td>
+            <div class="file-field input-field">
+                <div class="btn waves-effect waves-light">
+                    <span>Rx Image</span>
+                    {{ edit_form.image }}
+                </div>
+                <div class="file-path-wrapper">
+                    <div>
+                        <input id="file-upload" class="file-path validate" type="text"
+                               value="None Selected">
+                        <label for="file-upload">Current: {{ edit_form.image.value }}</label>
+                    </div>
+                </div>
+                <div class="">
+                    <button id="submit-edit" class="btn waves-effect waves-light"
+                            type="submit"
+                            name="action">Submit!
+                        <i class="material-icons right">send</i></button>
+                    <label class="red-text"
+                           for="submit-edit">{{ edit_form.errors }}</label>
+                </div>
+            </div>
+        </td>
+    </form>
+</tr>

@@ -1,0 +1,21 @@
+{% load static %}
+
+<div class="chip">
+    {% if rx.user.userprofile.profile_picture %}
+        <img src="{{ rx.user.userprofile.profile_picture.url }}" alt="Contact Person">
+        {% else %}
+        <img src="{% static 'img/anonymous-user.png' %}" alt="Contact Person">
+    {% endif %}
+    <a class="modal-trigger" href="#modal1">{{ user.email }}</a>
+
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4>{{ rx.user }}</h4>
+            <h5>Created: {{ rx.created }}</h5>
+            <h6>Your Rx is being processed. Will let you know when its ready for pick-up vai the provided e-mail.</h6>
+        </div>
+        <div class="modal-footer">
+            <a href="{% url 'current user profile' %}" class="modal-close waves-effect waves-green btn-flat">OK</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<form class="col s12" method="post" action="{% url 'on hold rx' rx.pk %}">
+    <div class="row valign-wrapper">
+        <div class="col s6">
+            {% csrf_token %}
+            {{ form_on_hold }}
+        </div>
+        <div class="col s2">
+            <button class="btn waves-effect waves-light" type="submit" name="action">OnHold
+                <i class="material-icons right">send</i></button>
+        </div>
+    </div>
+</form>

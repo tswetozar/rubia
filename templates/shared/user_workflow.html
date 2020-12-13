@@ -10,7 +10,19 @@
     {% load group_filter_template_tag %}
 
     <div class="section"></div>
-    {#    {% include 'partials/profile_data.html' %}#}
+
+
+    {% if errors %}
+        {% include 'components/error_container.html' %}
+    {% endif %}
+
+    {% if request.user|has_group:"Operators, Pharmacists, Managers" %}
+
+    {% include 'components/filter_rx.html' %}
+
+    {% endif %}
+
+    <div class="section"></div>
 
 
     {% if request.user|has_group:"Clients" %}

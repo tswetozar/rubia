@@ -1,0 +1,57 @@
+{% load group_filter_template_tag %}
+
+<tr>
+    <td><img class="materialboxed table-data-img" src="{{ rx.image.url }}"
+             alt=" "></td>
+    <td>{{ rx.first_name }}</td>
+    <td>{{ rx.last_name }}</td>
+    <td>{{ rx.age }}</td>
+    <td>
+        {{ rx.status }}
+    </td>
+    <td>
+        <a href="{% url 'edit rx' pk=rx.id %}" class="waves-effect waves-light btn">
+            <i class="material-icons left">edit</i>
+            edit
+        </a>
+    </td>
+</tr>
+<tr>
+    <td colspan="6">
+
+        {% if request.user|has_group:"Clients" %}
+
+            {% include 'components/active_modal.html' %}
+
+        {% else %}
+
+            {% if rx.onhold_set %}
+                {% for onhold in rx.onhold_set.all %}
+                    {% include 'components/on_hold_modal.html' %}
+                {% endfor %}
+            {% endif %}
+
+
+            {% if rx.prepared_set %}
+                {% for onhold in rx.prepared_set.all %}
+                    {% include 'components/prepared_modal.html' %}
+                {% endfor %}
+            {% endif %}
+
+
+            {% if rx.ready_set %}
+                {% for onhold in rx.ready_set.all %}
+                    {% include 'components/ready_modal.html' %}
+                {% endfor %}
+            {% endif %}
+
+
+            {% if rx.finished_set %}
+                {% for onhold in rx.finished_set.all %}
+                    {% include 'components/finished_modal.html' %}
+                {% endfor %}
+            {% endif %}
+
+        {% endif %}
+    </td>
+</tr>

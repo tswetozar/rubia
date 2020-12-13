@@ -63,7 +63,6 @@ def contains_only_letters(val):
 def offensive_word(val):
     val = val.lower()
     search_item = OffensiveWord.objects.filter(word__icontains=val)
-    # if val in COLLECTION:
+    # if val in COLLECTION: (only for testing cause of the empty initial test_db)
     if search_item:
         raise ValidationError(message='You can NOT swear on our site!!!', code=400, params={'value': val})
-    # todo make this with inheriting the class BaseValidator. now they are not displaying the error messages correctly

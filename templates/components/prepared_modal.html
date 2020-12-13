@@ -1,0 +1,21 @@
+{% load static %}
+
+<div class="chip chip-color-blue">
+    {% if onhold.user.userprofile.profile_picture %}
+        <img src="{{ onhold.user.userprofile.profile_picture.url }}" alt="Contact Person">
+        {% else %}
+        <img src="{% static 'img/anonymous-user.png' %}" alt="Contact Person">
+    {% endif %}
+    <a class="modal-trigger" href="#modal1">{{ user.email }}</a>
+
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4>{{ onhold.user }}</h4>
+            <h5>Created: {{ onhold.created }}</h5>
+            <h6>{{ onhold.comment }}</h6>
+        </div>
+        <div class="modal-footer">
+            <a href="{% url 'delete prepared' onhold.id %}" class="modal-close waves-effect waves-green btn-flat">DELETE!</a>
+        </div>
+    </div>
+</div>

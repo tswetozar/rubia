@@ -1,0 +1,12 @@
+<form class="col s12" method="post" action="{% url 'ready rx' rx.pk %}">
+    <div class="row valign-wrapper">
+        <div class="col s6">
+            {% csrf_token %}
+            {{ form_ready }}
+        </div>
+        <div class="col s2">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Ready
+                <i class="material-icons right">send</i></button>
+        </div>
+    </div>
+</form>

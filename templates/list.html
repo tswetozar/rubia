@@ -10,6 +10,11 @@
 
     <div class="container">
         <h5 class="center">list all items</h5>
+         <form action="{% url 'list rx' %}" method="get">
+            {% csrf_token %}
+            {{ filter_form }}
+            <button>Filter</button>
+        </form>
         <table class="highlight">
             <thead>
             <tr>
